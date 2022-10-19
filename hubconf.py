@@ -5,17 +5,9 @@ def kali():
   print ('kali')
   
 # Define a neural network YOUR ROLL NUMBER (all small letters) should prefix the classname
-class YourRollNumberNN(nn.Module):
-  pass
+class cs21m004NN(nn.Module):
   # ... your code ...
   # ... write init and forward functions appropriately ...
-  
-# Get cpu or gpu device for training.
-device = "cuda" if torch.cuda.is_available() else "cpu"
-#print(f"Using {device} device")
-
-# Define model
-class cs21m004NN(nn.Module):
     def __init__(self):
         super(cs21m004NN, self).__init__()
         self.flatten = nn.Flatten()
