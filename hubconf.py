@@ -1,8 +1,9 @@
 import torch
 from torch import nn
 
-def kali():
-  print ('kali')
+def device_used():
+  device = "cuda" if torch.cuda.is_available() else "cpu"
+  print(f"Using {device} device")
   
 # Define a neural network YOUR ROLL NUMBER (all small letters) should prefix the classname
 class cs21m004NN(nn.Module):
@@ -58,10 +59,8 @@ def get_model_advanced(train_data_loader=train_data_loader, n_epochs=10,lr=1e-4,
   
   # HINT: You can print sizes of tensors to get an idea of the size of the fc layer required
   # HINT: Flatten function can also be used if required
-  return model
   
-  
-  print ('Returning model... (rollnumber: xx)')
+  print ('Returning model... (rollnumber: CS21M004)')
   
   return model
 
