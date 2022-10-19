@@ -23,13 +23,10 @@ class cs21m004NN(nn.Module):
         x = self.flatten(x)
         logits = self.linear_relu_stack(x)
         return logits
-
-model = cs21m004NN().to(device)
-print(model)
     
 # sample invocation torch.hub.load(myrepo,'get_model',train_data_loader=train_data_loader,n_epochs=5, force_reload=True)
 def get_model(train_data_loader=None, n_epochs=10):
-  model = None
+  model = cs21m004NN().to(device)
 
   # write your code here as per instructions
   # ... your code ...
@@ -38,8 +35,7 @@ def get_model(train_data_loader=None, n_epochs=10):
   # Use softmax and cross entropy loss functions
   # set model variable to proper object, make use of train_data
   
-  print ('Returning model... (rollnumber: xx)')
-  
+  print ('Returning model... (rollnumber: CS21M004)')
   return model
 
 # sample invocation torch.hub.load(myrepo,'get_model_advanced',train_data_loader=train_data_loader,n_epochs=5, force_reload=True)
