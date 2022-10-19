@@ -9,6 +9,31 @@ class YourRollNumberNN(nn.Module):
   pass
   # ... your code ...
   # ... write init and forward functions appropriately ...
+  
+# Get cpu or gpu device for training.
+device = "cuda" if torch.cuda.is_available() else "cpu"
+#print(f"Using {device} device")
+
+# Define model
+class cs21m004NN(nn.Module):
+    def __init__(self):
+        super(cs21m004NN, self).__init__()
+        self.flatten = nn.Flatten()
+        self.linear_relu_stack = nn.Sequential(
+            nn.Linear(28*28, 512),
+            nn.ReLU(),
+            nn.Linear(512, 512),
+            nn.ReLU(),
+            nn.Linear(512, 10)
+        )
+
+    def forward(self, x):
+        x = self.flatten(x)
+        logits = self.linear_relu_stack(x)
+        return logits
+
+model = cs21m004NN().to(device)
+print(model)
     
 # sample invocation torch.hub.load(myrepo,'get_model',train_data_loader=train_data_loader,n_epochs=5, force_reload=True)
 def get_model(train_data_loader=None, n_epochs=10):
