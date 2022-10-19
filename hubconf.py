@@ -1,5 +1,7 @@
 import torch
 from torch import nn
+from torch.utils.data import DataLoader, ConcatDataset, random_split
+from torchvision.transforms import ToTensor
 
 def device_used():
   device = "cuda" if torch.cuda.is_available() else "cpu"
@@ -63,6 +65,27 @@ def get_model_advanced(train_data_loader=train_data_loader, n_epochs=10,lr=1e-4,
   print ('Returning model... (rollnumber: CS21M004)')
   
   return model
+
+def train(dataloader, model, loss_fn, optimizer):
+    batch_size = 100
+
+    # Create data loaders.
+    train_dataloader = DataLoader(training_data, batch_size=batch_size)
+    test_dataloader = DataLoader(test_data, batch_size=batch_size)
+    
+    size = len(dataloader.dataset)
+    model.train()
+    for batch, (X, y) in enumerate(dataloader):
+        X, y = X.to(device), y.to(device)
+
+        # Compute prediction error
+        pred = model(X)
+        loss = loss_fn(pred, y)
+
+        # Backpropagation
+        optimizer.zero_grad()
+        loss.backward()
+        optimizer.step()
 
 # sample invocation torch.hub.load(myrepo,'test_model',model1=model,test_data_loader=test_data_loader,force_reload=True)
 def test_model(model1=model, test_data_loader=test_data_loader):
