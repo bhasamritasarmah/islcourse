@@ -98,10 +98,9 @@ def get_optimiser(model):
 
 ##############################
 
-def loss_fn (y_pred, y_ground):
-  loss = - (y_ground * torch.log(y_pred + 0.0001))
-  loss = torch.sum(loss)
-  return loss
+def get_loss_fn (y_pred, y_ground):
+  loss_fn = nn.CrossEntropyLoss()
+  return loss_fn
 
 ##############################
 
