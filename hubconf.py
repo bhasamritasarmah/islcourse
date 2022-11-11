@@ -154,7 +154,7 @@ def _test_network(dataloader, model, loss_fn):
             correct += (pred.argmax(1) == y).type(torch.float).sum().item()
     test_loss /= num_batches
     correct /= size
-    print(f"Test Error: \n Accuracy: {(100*correct):>0.1f}%, Avg loss: {test_loss:>8f} \n")
+    print(f"Test Error: \n Accuracy: {(100*correct):>0.1f}%, Avg loss: {test_loss:>8f}")
     #precision_recall_fscore_support(y_ground, y_pred, average='macro')
     accuracy1 = Accuracy()
     print('Accuracy :', accuracy1(pred,y))
