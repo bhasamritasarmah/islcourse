@@ -66,7 +66,7 @@ class cs21m004_cnn_advanced (nn.Module):
     self.fc = nn.Linear(10 * pic_length * pic_breadth, 10)
     self.softmax = nn.Softmax(dim = 1)
 
-  def forward(self, x):
+  def forward(self, x, config):
     x = self.conv_in_layer(x)
     i = 0
     for i in range(len(config)):
@@ -122,7 +122,7 @@ def _train_network (train_loader, model, optimizer, loss_fn):
   
 ##############################
 
-def _train_network_advanced (train_loader, model, optimizer, loss_fn):
+def _train_network_advanced (train_loader, config, model, optimizer, loss_fn):
   num_batches = len(train_loader)
   
   training_loss = 0.0
@@ -132,7 +132,7 @@ def _train_network_advanced (train_loader, model, optimizer, loss_fn):
     #label = label.to(device)
 
     #forward + backward + optimize
-    output = model(input)
+    output = model(input, config)
     label_1hot = functional.one_hot(label, 10)
     loss = loss_fn (output, label_1hot)
     training_loss += loss.item()
@@ -150,6 +150,15 @@ def train_model(train_data_loader, model, optimiser, loss_fn, epochs = 10):
   for e in range(epochs):
     print(f"Epoch {e+1}: ")
     _train_network(train_data_loader, model, optimiser, loss_fn)
+
+  print("Finished training")
+  
+##############################
+
+def train_model_advanced(train_data_loader, model, optimiser, loss_fn, epochs = 10):
+  for e in range(epochs):
+    print(f"Epoch {e+1}: ")
+    _train_network_advanced(train_data_loader, config, model, optimiser, loss_fn)
 
   print("Finished training")
   
