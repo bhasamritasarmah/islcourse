@@ -155,7 +155,7 @@ def _test_network(dataloader, model, loss_fn):
     recall = Recall(average = 'macro', num_classes = 10)
     print('recall :', recall(pred,y))
     f1_score = F1Score(average = 'macro', num_classes = 10)
-    print('f1_score :', f1_score(pred,y))
+    print('f1_score :', f1_score(pred,y), '\n')
     return accuracy1,precision, recall, f1_score
   
 ##############################
