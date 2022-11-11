@@ -30,7 +30,7 @@ def create_dataloaders (training_data, test_data, batch_size = 64):
 ##############################
 
 device = "cuda" if torch.cuda.is_available() else "CPU"
-print(f"Using {device} device")
+#print(f"Using {device} device")
 
 ##############################
 
