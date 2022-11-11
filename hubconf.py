@@ -131,7 +131,7 @@ def _train_network (train_loader, model, optimizer, loss_fn):
 def train_model(train_data_loader, model, optimiser, loss_fn, epochs = 10):
   for e in range(epochs):
     print(f"Epoch {e+1}: ")
-    train_network(train_data_loader, model, optimiser, loss_fn)
+    _train_network(train_data_loader, model, optimiser, loss_fn)
 
   print("Finished training")
   
@@ -169,7 +169,7 @@ def _test_network(dataloader, model, loss_fn):
 def test_model(dataloader, model, loss_fn, epochs = 10):
   for e in range(epochs):
     print(f"Epochs {e+1}: ")
-    test_network(dataloader, model, loss_fn)
+    _test_network(dataloader, model, loss_fn)
 
   print("Finished Testing.")
   
