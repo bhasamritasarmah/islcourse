@@ -7,7 +7,7 @@ import torch.nn.functional as functional
 import torch.optim as optim
 import numpy as np
 
-! pip install torchmetrics
+pip install torchmetrics
 from torchmetrics import Precision, Recall, F1Score, Accuracy
 
 ##############################
