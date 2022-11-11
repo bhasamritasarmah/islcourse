@@ -98,12 +98,6 @@ def get_optimiser(model):
 
 ##############################
 
-def get_loss_fn ():
-  loss_fn = nn.CrossEntropyLoss()
-  return loss_fn
-
-##############################
-
 def _train_network (train_loader, model, optimizer, loss_fn):
   num_batches = len(train_loader)
   
