@@ -56,7 +56,7 @@ class cs21m004_cnn (nn.Module):
 
 class cs21m004_cnn_advanced (nn.Module):
   def __init__(self, config, pic_length, pic_breadth):
-    super().__init__()
+    super(cs21m004_cnn_advanced, self).__init__()
     self.conv_in_layer = nn.Conv2d(1, config[0][0], kernel_size = (2,2), stride = 1, padding = "same")
     self.conv_layer = []
     for item in config:
