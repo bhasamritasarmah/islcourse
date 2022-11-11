@@ -155,7 +155,7 @@ def train_model(train_data_loader, model, optimiser, loss_fn, epochs = 10):
   
 ##############################
 
-def train_model_advanced(train_data_loader, model, optimiser, loss_fn, epochs = 10):
+def train_model_advanced(train_data_loader, config, model, optimiser, loss_fn, epochs = 10):
   for e in range(epochs):
     print(f"Epoch {e+1}: ")
     _train_network_advanced(train_data_loader, config, model, optimiser, loss_fn)
