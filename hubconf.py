@@ -66,7 +66,7 @@ class cs21m004_cnn_advanced (nn.Module):
     self.fc = nn.Linear(10 * pic_length * pic_breadth, 10)
     self.softmax = nn.Softmax(dim = 1)
 
-  def forward(self, x, config):
+  def forward(self, x):
     x = self.conv_in_layer(x)
     i = 0
     for i in range(len(config)):
