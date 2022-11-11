@@ -98,7 +98,7 @@ def get_optimiser(model):
 
 ##############################
 
-def get_loss_fn (y_pred, y_ground):
+def get_loss_fn ():
   loss_fn = nn.CrossEntropyLoss()
   return loss_fn
 
