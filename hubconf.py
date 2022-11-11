@@ -122,6 +122,30 @@ def _train_network (train_loader, model, optimizer, loss_fn):
   
 ##############################
 
+def _train_network_advanced (train_loader, model, optimizer, loss_fn):
+  num_batches = len(train_loader)
+  
+  training_loss = 0.0
+  for i, data in enumerate(train_loader, start = 0):
+    input, label = data
+    #input = input.to(device)
+    #label = label.to(device)
+
+    #forward + backward + optimize
+    output = model(input)
+    label_1hot = functional.one_hot(label, 10)
+    loss = loss_fn (output, label_1hot)
+    training_loss += loss.item()
+
+    #flush out parameter gradients
+    optimizer.zero_grad()
+    loss.backward()
+    optimizer.step()
+
+  print(f"Average loss: {training_loss / num_batches}")  
+
+##############################
+
 def train_model(train_data_loader, model, optimiser, loss_fn, epochs = 10):
   for e in range(epochs):
     print(f"Epoch {e+1}: ")
