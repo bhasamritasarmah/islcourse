@@ -1,4 +1,8 @@
 import numpy as np
+import torch
+from torch import nn
+import torch.nn.functional as F
+import torch.optim as optim
 from sklearn import datasets
 from sklearn.datasets import make_blobs
 from sklearn.datasets import make_circles
@@ -98,4 +102,65 @@ def perform_gridsearch_cv_multimetric(model1 = None, param_grid = None, cv = 5, 
     top1_scores.append(score(model1, X, y))
   
   return top1_scores
+
+##############################
+#Part 3
+
+def get_mnist_tensor():
+  data = datasets.load_digits()
+  x = data.data
+  y = data.target
+  x = torch.from_numpy(x)
+  y = torch.from_numpy(y)
+  return x, y
+
+class MyNN(nn.Module):
+  def __init__(self, inp_dim = 64, hid_dim = 13, num_classes = 10):
+    super(MyNN,self).__init__()
+    
+    self.fc_encoder = nn.Linear(inp_dim, hid_dim)
+    self.fc_decoder = nn.Linear(hid_dim, inp_dim)
+    self.fc_classifier = nn.Linear(hid_dim, num_classes)
+    
+    self.relu = nn.ReLU()
+    self.softmax = nn.Softmax()
+    self.flatten = nn.Flatten(start_dim = 0, end_dim = -1)
+    
+  def forward(self,x):
+    x = self.flatten(x)
+    x_enc = self.fc_encoder(x)
+    x_enc = self.relu(x_enc)
+    
+    y_pred = self.fc_classifier(x_enc)
+    y_pred = self.softmax(y_pred)
+    
+    x_dec = self.fc_decoder(x_enc)
+    
+    return y_pred, x_dec
+  
+  # This a multi component loss function - lc1 for class prediction loss and lc2 for auto-encoding loss
+  def loss_fn(self, x, yground, y_pred, xencdec):
+    yground_1hot = F.one_hot(yground, num_classes = 10)
+    ce_loss = nn.CrossEntropyLoss()
+    lc1 = ce_loss(y_pred, yground)
+    
+    # auto encoding loss
+    lc2 = torch.mean((x - xencdec)**2)
+    
+    lval = lc1 + lc2
+    
+    return lval
+  
+  def get_loss_on_single_point(mynn=None, x0 = None, y0 = None):
+  y_pred, xencdec = mynn(x0)
+  lossval = mynn.loss_fn(x0, y0, y_pred, xencdec)
+  # the lossval should have grad_fn attribute set
+  return lossval
+
+def get_loss_on_single_point(mynn=None, x0 = None, y0 = None):
+  y_pred, xencdec = mynn(x0)
+  lossval = mynn.loss_fn(x0, y0, y_pred, xencdec)
+  # the lossval should have grad_fn attribute set
+  return lossval
+
 ##############################
