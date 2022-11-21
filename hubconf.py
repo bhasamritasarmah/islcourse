@@ -56,7 +56,7 @@ def build_rf_model(X=None, y=None):
   rf_model = rf.fit(X, y)
   return rf_model
 
-def get_metrics(model = None, X = None, y = None):
+def get_metrics(model1 = None, X = None, y = None):
   y_pred = model.predict(X)
   acc = accuracy_score(y, y_pred)
   prec = precision_score(y, y_pred, average = "weighted")
