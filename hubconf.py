@@ -152,15 +152,15 @@ class MyNN(nn.Module):
     return lval
   
   def get_loss_on_single_point(mynn=None, x0 = None, y0 = None):
-  y_pred, xencdec = mynn(x0)
-  lossval = mynn.loss_fn(x0, y0, y_pred, xencdec)
-  # the lossval should have grad_fn attribute set
-  return lossval
+    y_pred, xencdec = mynn(x0)
+    lossval = mynn.loss_fn(x0, y0, y_pred, xencdec)
+    # the lossval should have grad_fn attribute set
+    return lossval
 
-def get_loss_on_single_point(mynn=None, x0 = None, y0 = None):
-  y_pred, xencdec = mynn(x0)
-  lossval = mynn.loss_fn(x0, y0, y_pred, xencdec)
-  # the lossval should have grad_fn attribute set
-  return lossval
+  def get_loss_on_single_point(mynn=None, x0 = None, y0 = None):
+    y_pred, xencdec = mynn(x0)
+    lossval = mynn.loss_fn(x0, y0, y_pred, xencdec)
+    # the lossval should have grad_fn attribute set
+    return lossval
 
 ##############################
